@@ -22,141 +22,129 @@ hero:
       link: https://github.com/withastro/starlight
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
-import AboutAstro from '~/components/about-astro.astro';
-import TestimonialGrid from '~/components/testimonial-grid.astro';
-import Testimonial from '~/components/testimonial.astro';
+import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
+import LinkCard from '../../components/LinkCard.astro';
+import { Steps, TabItem } from '@astrojs/starlight/components';
+import Tabs from '../../components/Tabs.astro';
+
 
 <CardGrid stagger>
-	<Card title="Documentation that delights" icon="open-book">
-		Includes: Site navigation, search, internationalization, SEO, easy-to-read
-		typography, code highlighting, dark mode and more.
-	</Card>
-	<Card title="Powered by Astro" icon="rocket">
-		Leverage the full power and performance of Astro. Extend Starlight with your
-		favorite Astro integrations and libraries.
-	</Card>
-	<Card title="Markdown, Markdoc, and MDX" icon="document">
-		Bring your favorite markup language. Starlight gives you built-in
-		frontmatter validation with TypeScript type-safety.
-	</Card>
-	<Card title="Bring your own UI components" icon="puzzle">
-		Starlight ships as a framework-agnostic, complete docs solution. Extend with
-		React, Vue, Svelte, Solid, and more.
-	</Card>
+
+    <Card title="Easy to use" icon="information">
+
+    	Well [documented](/plugins/docgen/example/) and easy to use <abbr title="command-line interface">CLI</abbr> with tab completion with `--help` always available.
+
+    </Card>
+
+    <Card title="Smart" icon="star">
+
+    	Automatic change determination with minimal configuration.
+
+    </Card>
+
+    <Card title="Safe & strict" icon="approve-check-circle">
+
+    	Avoid common pitfalls and mistakes when working in a monorepo with [Workspace validation](/core/graph/#verifying-configurations).
+
+    </Card>
+
+    <Card title="Extendable" icon="puzzle">
+
+    	Includes [first-party plugins](/plugins/) and a robust extendable architecture to customize to your team’s needs.
+
+    </Card>
+
 </CardGrid>
 
-<TestimonialGrid title="What people are saying">
-  <Testimonial
-    name="Rachel"
-    handle="rachelnabors"
-    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
-  >
-    The Astro team have EVOLVED how docs can be done and you can get it all out of the box with their Starlight project.
-  </Testimonial>
-  <Testimonial
-    name="Flavio"
-    handle="flaviocopes"
-    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
-  >
-    Astro’s official starter kit Starlight is a truly incredible tool for building a documentation website
-  </Testimonial>
-  <Testimonial
-    name="Tomek"
-    handle="sulco"
-    cite="https://twitter.com/sulco/status/1735610348730802342"
-  >
-    Starlight is our go-to example of a great DX: the speed, convenience, and
-    attention to details is inspiring. It takes care of the tech and the looks,
-    so you can focus on your content 👏
-     
-    StackBlitz team absolutely loves it!
-  </Testimonial>
-  <Testimonial
-    name="Roberto"
-    handle="RmeetsH"
-    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
-  >
-    Starlight has been a game-changer for me, allowing me to focus on content creation.
+## What's a monorepo?
 
-    Its intuitive design not only streamlines my workflow but also reduces onboarding time for open-source developers.
+<LinkCard
+	title="Monorepo primer"
+	description="Refresh your knowledge on why a monorepo may be right for you"
+	href="/concepts/primer/"
+/>
 
-  </Testimonial>
-  <Testimonial
-    name="Joel"
-    handle="jhooks"
-    cite="https://twitter.com/jhooks/status/1727405160547418405"
-  >
-    Spent some more time with Starlight for the Course Builder docs and it’s been great so far. Lots of nice touches and can focus on writing in Markdown and not fiddling with the site.
-  </Testimonial>
-  <Testimonial
-    name="Rick"
-    handle="rick_viscomi"
-    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
-  >
-    Started playing with Starlight. Gotta say I’m very impressed with the performance out of the box.
+## Features
 
-    💯💯💯💯
+### <Icon name="rocket" /> Automating tasks
 
-  </Testimonial>
-  <Testimonial
-    name="Nicolas"
-    handle="beaussan"
-    cite="https://twitter.com/beaussan/status/1735625189583466893"
-  >
-    Starlight is the best way to get started with documentation, between the
-    power and speed of Astro, and the tooling from Starlight, it’s a match in
-    heaven.
+oneRepo simplifies automation by handling common tasks for you and your team. Say goodbye to spending excessive time tinkering with tooling and hello to focusing on your applications.
 
-    It has been my go to for a while now, and I keep on loving it!
+### <Icon name="approve-check-circle" /> Strict safety & checks
 
-  </Testimonial>
-  <Testimonial
-    name="Sylwia"
-    handle="SylwiaVargas"
-    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
-  >
-    I used Starlight in my last job and loved it. Great components, intuitive
-    design, and super-responsive community (whenever anyone needed something,
-    they’d ship it soonish or tell you a workaround). Very pleasant experience.
-  </Testimonial>
-  <Testimonial
-    name="Lou Cyx"
-    handle="loucyx"
-    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
-  >
-    The docs on my monorepo site look better than ever thanks to Starlight. It’s extremely easy to use without losing all the power of Astro. Thank you for working on it!
-  </Testimonial>
-  <Testimonial
-    name="BowTiedWebReaper"
-    handle="BowTiedWebReapr"
-    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
-  >
-    Starlight is my go-to tool for documentation. It made it super easy to add docs to my existing Astro product website, vs needing a subdomain to use with another tool.
-  </Testimonial>
-  <Testimonial
-    name="Jeff"
-    handle="J_Everhart383"
-    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
-  >
-    I’ve been rebuilding the WPEngine Atlas Platform docs. Trust me when I say Starlight has everything you need to make an A+ docs platform&nbsp;🙌
-  </Testimonial>
-  <Testimonial
-    name="Chloe"
-    handle="solelychloe"
-    cite="https://twitter.com/solelychloe/status/1695115277602628082"
-  >
-    Give Starlight a try!
+Gone are the days of manually configuring file glob patterns for Workspace integrity and decision making for whether or not checks and tasks must run. oneRepo automatically and accurately determines which Workspaces, tasks, and checks are necessary for any given change
 
-    I use it for a few of my sites and it’s great.
+### <Icon name="puzzle" /> Stop recompiling dependencies
 
-  </Testimonial>
-</TestimonialGrid>
+With oneRepo, you can utilize shared Workspaces as source-level dependencies. This means that all import/require chains within the monorepo originate from the source files, eliminating the need to rebuild shared packages to capture changes.
 
-<AboutAstro title="Brought to you by">
-Astro is the all-in-one web framework designed for speed.
-Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
+### <Icon name="list-format" /> Human-readable output
 
-[Learn about Astro](https://astro.build/)
+Logging output from every command and tool in oneRepo is carefully grouped, documented, and prevented from overlapping parallel executions. Every line includes context, timing, and log-type information.
 
-</AboutAstro>
+---
+
+<LinkCard
+	title="Full feature list"
+	href="/concepts/why-onerepo/#features"
+	description="oneRepo is full of a ton of features focused on speed and safety. We haven’t even scratched the surface!"
+	icon="rocket"
+/>
+
+## Install and get started now
+
+<Steps>
+
+1.  **Install the CLI**
+
+    First, install oneRepo's `one` command into your path:
+
+    <Tabs group="pkgmanager">
+
+        <TabItem label="npm">
+
+        	```sh title="Install via npm"
+        	npx --package=onerepo one install
+        	```
+
+        </TabItem>
+
+        <TabItem label="yarn">
+
+        	```sh title="Install via Yarn"
+        	yarn dlx --package=onerepo one install
+        	```
+
+        </TabItem>
+
+        <TabItem label="pnpm">
+
+        	```sh title="Install via pnpm"
+        	pnpm --package=onerepo dlx one install
+        	```
+
+        </TabItem>
+
+    </Tabs>
+
+1.  **Create your oneRepo**
+    Next, use the `one create` command to initialize into an existing or a new repository.
+
+    ```sh title="Initialize oneRepo in a new or existing repository"
+    one create
+    ```
+
+1.  **Keep going…**
+
+    You're nearly done. Follow the in-prompt instructions or continue on with the [getting started guide](/docs/getting-started/).
+
+</Steps>
+
+## Helpful links
+
+<CardGrid>
+	<LinkCard title="Configuration" href="/docs/config/" />
+	<LinkCard title="Custom commands" href="/docs/commands/" />
+	<LinkCard title="Changelog" href="/changelogs/" />
+	<LinkCard title="GitHub" href="https://github.com/paularmstrong/onerepo" />
+</CardGrid>
