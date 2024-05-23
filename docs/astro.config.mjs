@@ -34,10 +34,10 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			title: 'Starlight',
+			title: 'zurablog',
 			logo: {
-				light: '/src/assets/logo-light.svg',
-				dark: '/src/assets/logo-dark.svg',
+				light: '/src/assets/20240523_220550.png',
+				dark: '/src/assets/20240523_220550.png',
 				replacesTitle: true,
 			},
 			editLink: {
