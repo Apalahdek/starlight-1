@@ -1,0 +1,80 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+
+const meta = 'meta' in Astro.props.entry.data ? Astro.props.entry.data.meta : null;
+const stabilityColor: Record<'stable' | 'unstable' | 'preview' | 'experimental' | 'deprecated', string> = {
+	stable: 'success',
+	unstable: 'danger',
+	preview: 'info',
+	experimental: 'caution',
+	deprecated: '',
+};
+
+const { title } = Astro.props.entry.data;
+
+const isVisualizer = Astro.props.slug === 'visualize';
+
+const isPlugin = title.startsWith('@onerepo/plugin-');
+---
+
+{
+	isVisualizer ? null : (
+		<Fragment>
+			<h1 data-tacos id="_top">
+				{Astro.props.entry.data.title}
+			</h1>
+			{meta ? (
+				<ul class="tags">
+					{meta.version ? <li class="tag info">v{meta.version}</li> : null}
+					{meta.stability ? (
+						<li class={`tag ${stabilityColor[meta.stability as keyof typeof stabilityColor]}`}>{meta.stability}</li>
+					) : null}
+					{isPlugin ? (
+						<Fragment>
+							<li>
+								<a class="icon-link" target="_blank" href={`https://www.npmjs.com/package/${title}/`}>
+									<Icon name="external" size="1rem" />
+									npm
+								</a>
+							</li>
+							<li>
+								<a
+									class="icon-link"
+									target="_blank"
+									href={`https://github.com/paularmstrong/onerepo/tree/main/plugins/${title.replace(
+										'@onerepo/plugin-',
+										'',
+									)}/`}
+								>
+									<Icon name="github" size="1rem" />
+									Source
+								</a>
+							</li>
+							<li>
+								<a class="icon-link" target="_blank" href={`/changelogs/${title.replace('@', '')}/`}>
+									<Icon name="document" size="1rem" />
+									Changelog
+								</a>
+							</li>
+						</Fragment>
+					) : null}
+				</ul>
+			) : null}
+		</Fragment>
+	)
+}
+
+<style>
+	.icon-link {
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		color: var(--sl-color-white);
+		text-decoration: underline;
+		font-size: var(--sl-text-sm);
+	}
+	.icon-link:hover {
+		color: var(--sl-color-accent-high);
+	}
+</style>

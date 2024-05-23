@@ -1,0 +1,314 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<div class="vis-container">
+	<div class="container">
+		<div class="controls not-content">
+			<button id="help">Help</button>
+
+			<button id="reset-zoom">Reset zoom</button>
+
+			{
+				/*<fieldset>
+				<legend>Dependencies</legend>
+				<label>
+					<input type="checkbox" class="switch" value="3" name="dependencies" checked switch />
+					Production
+				</label>
+
+				<label>
+					<input type="checkbox" class="switch" value="2" name="dependencies" checked switch />
+					Development
+				</label>
+
+				<label>
+					<input type="checkbox" class="switch" value="1" name="dependencies" switch />
+					Peer
+				</label>
+			</fieldset> */
+			}
+		</div>
+	</div>
+
+	<dialog data-dialog="help">
+		<div class="dialog-frame sl-markdown-content">
+			<h2>How to read this chart</h2>
+			<p>
+				<Icon name="warning" color="goldenrod" size="2rem" /> Warning: This visualizer is a work in progress and proof of
+				concept. New features are in the works. If you have ideas for what you would like implemented, please open a pull
+				request of submit a <a
+					href="https://github.com/paularmstrong/onerepo/issues/new?assignees=&labels=feature,triage&projects=&template=feature-request.yaml"
+					>feature request</a
+				>.
+			</p>
+
+			<p>Open this page for your monorepo using the following command:</p>
+
+			<pre>one graph show --open</pre>
+
+			<p>Explore the preview by clicking “Show an example” on the main screen.</p>
+
+			<h3>Controls</h3>
+			<ul>
+				<li>Use your mouse wheel to zoom in and out of the chart.</li>
+				<li>Click and drag the chart with your mouse to pan.</li>
+				<li>Hover over a Workspace node to highlight dependencies and dependents.</li>
+				<li>Click an individual Workspace node to lock the highlight. Click anywhere else to unlock the highlight.</li>
+			</ul>
+			<form method="dialog">
+				<button>OK</button>
+			</form>
+		</div>
+	</dialog>
+
+	<div class="visualizer not-content">
+		<div class="vis-content">
+			<div id="mermaid" class="mermaid">
+				<svg width="100%" height="100%">
+					<g class="group">
+						<rect class="underlay" fill="transparent"></rect>
+						<g class="viz"></g>
+					</g>
+				</svg>
+			</div>
+			<div class="vis--no-content">
+				<p>Graph not found. Run the following to</p>
+				<pre>one graph show --open</pre>
+				<button
+					id="example"
+					data-graph-data="eJzFVttygjAQ%2FZc8g7bSvvDkfzg%2BxLjGtJQwSbDjOP57wy0SJJAqjG9Mlt095%2BwluaATitHb4v1z8YECBHsKEsUXtOYpCMj4UnCuULzZoDVLFYgUJ0uQif4OsySnLEXBahu0rV8gVUh4emC0sTWxKo%2Bw8q%2BNtc3xKzniVCMCJR0%2F7DmhkDqMBRSHKQNx4OIHpwTCX8E0dtePApRiTrM6ZyCJYJkr0UnHvqEwKjVhO0oZu5I3wzZwim8X5uYU2U7tmrhcqjz9pSp86sSlakp7h6Zy0UAdVZk5Yd3zXc6SPQhZe5tzylT36MAS6J7JfJcJTkDeBUg4pUW1IlvPqgyeajdcSqnGELsYnrGgPvSowNnRh7PNbFyJDJNvTCHUTY6flmRgMAuV5qu%2BtzzztoRj71jco4fq3%2BYyDbZy7c1blXuxh%2Fa%2FL%2FCepTwg8PiMTCOnuQHmlfT1Pd26yyak6sdrGgb1Zfuy3v8feOdjwO%2BK1iuod%2FmO5zPLu17jupkGcg4ztALb1kEazueE7fXINjE19rq%2F%2B%2Fd0363jmDkXDJPQglFHXo112aQDXsQfR%2FHMo%2BNJgGVqC%2BGk%2FFt4fZI80nR1KP%2FufbCSZeFGs8z8BuxEtTSdvDeqAfWa5X%2FflwMDc8x3ISaK8d5X3viSNYZ4s71e%2FwDvxlo0"
+					>Show an example</button
+				>
+			</div>
+		</div>
+	</div>
+</div>
+
+<dialog data-dialog="error">
+	<div class="dialog-frame">
+		<h2>Error</h2>
+		<p id="error-description"></p>
+		<form method="dialog">
+			<button>OK</button>
+		</form>
+	</div>
+</dialog>
+
+<script src="./visualizer.ts"></script>
+
+<style>
+	.vis-container {
+		height: calc(100vh - var(--sl-nav-height));
+		margin: -1.5rem calc(50% - 50vw) 0;
+		width: 100vw;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	.controls {
+		border-bottom: 1px solid var(--sl-color-hairline);
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	.visualizer {
+		flex-grow: 1;
+		flex-shrink: 0;
+	}
+
+	.visualizer .node:hover rect.basic.label-container {
+		stroke: var(--sl-color-green-high) !important;
+		fill: var(--sl-color-green-low) !important;
+	}
+
+	.visualizer .node rect.basic.label-container {
+		stroke-width: 2px !important;
+	}
+
+	.visualizer .nodeLabel {
+		font-weight: 900 !important;
+	}
+
+	.vis-content {
+		height: 100%;
+		width: 100vw;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.vis-content .mermaid {
+		flex-grow: 0;
+		flex-shrink: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.vis-content .mermaid.hidden {
+		display: none;
+	}
+
+	.vis--no-content {
+		position: absolute;
+	}
+
+	.controls {
+		margin: 1em -100%;
+		margin: 1em calc(50% - 50vw);
+		padding: 0 2rem;
+		display: flex;
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.controls fieldset {
+		display: flex;
+		gap: 1rem;
+	}
+
+	dialog {
+		margin: 0;
+		background-color: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		max-height: 100%;
+		box-shadow: var(--sl-shadow-lg);
+	}
+	dialog[open] {
+		display: grid;
+	}
+
+	dialog::backdrop {
+		background-color: var(--sl-color-backdrop-overlay);
+		-webkit-backdrop-filter: blur(0.1rem);
+		backdrop-filter: blur(0.1rem);
+	}
+
+	.dialog-frame {
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	@media (min-width: 50rem) {
+		dialog {
+			margin: 4rem auto auto;
+			border-radius: 0.5rem;
+			width: 90%;
+			max-width: 40rem;
+			height: min-content;
+			min-height: 15rem;
+			max-height: calc(100% - 8rem);
+		}
+
+		.dialog-frame {
+			padding: 1.5rem;
+		}
+	}
+
+	label {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.switch {
+		appearance: none;
+		-webkit-appearance: none;
+		border: none;
+		width: 2.5rem;
+		height: 1.25rem;
+		border-radius: 1rem;
+		transition: color 0.1s ease-in-out;
+		background-color: var(--sl-color-gray-3);
+	}
+
+	.switch:checked {
+		background-color: var(--sl-color-accent);
+	}
+
+	.switch::after {
+		content: '';
+		display: block;
+		background-color: white;
+		width: 1rem;
+		height: 1rem;
+		border-radius: 50%;
+		transform: translate(0.125rem, 0.125rem);
+		transition: transform 0.1s ease-in-out;
+	}
+	.switch:checked::after {
+		transform: translate(1.375rem, 0.125rem);
+	}
+</style>
+
+<style is:global>
+	.vis-container {
+		--speed: 0.2s;
+		--ease: ease-in-out;
+		--sl-color-aurora-blue: oklch(62.06% 0.207 246.71);
+	}
+	.vis-container .label-container {
+		fill: var(--sl-color-gray-5);
+		stroke-width: 2px;
+		stroke: var(--sl-color-gray-4);
+	}
+	.vis-container .node {
+		cursor: pointer;
+	}
+
+	.vis-container .node text {
+		font-size: var(--sl-text-lg);
+		fill: var(--sl-color-white);
+	}
+
+	.vis-container .node.node--unrelated {
+		opacity: 0.25;
+	}
+
+	.vis-container .edgePath path {
+		fill: none;
+		stroke: var(--sl-color-gray-2);
+	}
+	.vis-container .edgePath marker path {
+		fill: var(--sl-color-gray-2);
+	}
+
+	.vis-container .edgePath.edge--input path {
+		stroke: var(--sl-color-aurora-blue);
+		stroke-width: 4px;
+	}
+	.vis-container .edgePath.edge--input marker path {
+		fill: var(--sl-color-aurora-blue);
+	}
+	.vis-container .edgePath.edge--output path {
+		stroke: var(--sl-color-accent);
+		stroke-width: 4px;
+	}
+	.vis-container .edgePath.edge--output marker path {
+		fill: var(--sl-color-accent);
+	}
+
+	.vis-container .edgeLabel {
+		opacity: 0;
+		fill: var(--sl-color-text);
+	}
+	.edgeLabel text {
+		font-size: var(--sl-text-xl);
+	}
+
+	.vis-container .edgeLabel.edgeLabel--related {
+		opacity: 1;
+	}
+
+	.vis-container .edgePath.edge--unrelated path {
+		opacity: 0.25;
+	}
+
+	.vis-container .edgeLabel .edge-box {
+		fill: var(--sl-color-bg);
+	}
+</style>

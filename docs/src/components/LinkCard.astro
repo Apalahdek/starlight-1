@@ -1,0 +1,119 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import { ImageMetadata } from 'astro';
+import type { ComponentProps, HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
+	inline?: boolean;
+	title: string;
+	description?: string;
+	icon?: ComponentProps<typeof Icon>['name'];
+	image?: ImageMetadata;
+	size?: 'small' | 'large';
+}
+
+const { title, description, icon, image, inline, size, ...attributes } = Astro.props;
+---
+
+<div class={`sl-link-card ${inline ? 'inline' : ''}`}>
+	{
+		image ? (
+			<span class={`not-content img ${size === 'small' ? 'img-small' : ''}`}>
+				<Image src={image} alt="" />
+			</span>
+		) : null
+	}
+	<span class="sl-flex stack">
+		<a {...attributes}>
+			<span class="title">{icon ? <Icon name={icon} size="1.333em" class="icon" /> : null}{title}</span>
+		</a>
+		{description && <span class="description" set:html={description} />}
+	</span>
+	<Icon name="right-arrow" size="1.333rem" class="icon icon--arrow rtl:flip" />
+</div>
+
+<style>
+	.sl-link-card {
+		display: flex;
+		gap: 1rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		box-shadow: var(--sl-shadow-sm);
+		position: relative;
+		background-color: var(--sl-color-black);
+	}
+
+	.sl-link-card.inline {
+		display: inline-flex;
+	}
+
+	a {
+		text-decoration: none;
+		line-height: var(--sl-line-height-headings);
+	}
+
+	/* a11y fix for https://github.com/withastro/starlight/issues/487 */
+	a::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+
+	.stack {
+		flex-direction: column;
+		gap: 0.5rem;
+		flex-grow: 1;
+	}
+
+	.title {
+		color: var(--sl-color-white);
+		font-weight: 600;
+		font-size: var(--sl-text-lg);
+		line-height: var(--sl-line-height-headings);
+		display: flex;
+		gap: 1rem;
+	}
+
+	.description {
+		color: var(--sl-color-gray-3);
+		line-height: 1.5;
+	}
+
+	.icon {
+		flex-shrink: 0;
+		flex-grow: 0;
+		justify-self: flex-end;
+	}
+	.icon--arrow {
+		color: var(--sl-color-gray-3);
+	}
+
+	.img {
+		display: flex;
+		flex-grow: 0;
+		flex-shrink: 1;
+		align-items: top;
+	}
+	.img img {
+		display: block;
+		aspect-ratio: 1;
+		width: 4rem;
+		height: 4rem;
+	}
+	.img.img-small img {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	/* Hover state */
+	.sl-link-card:hover {
+		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+		border-color: var(--sl-color-gray-2);
+	}
+
+	.sl-link-card:hover .icon {
+		color: var(--sl-color-white);
+	}
+</style>
