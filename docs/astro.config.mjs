@@ -59,7 +59,7 @@ export default defineConfig({
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + '20240524_133924_0000.jpg?v=1' },
+					attrs: { property: '20240524_133924_0000:image', content: site + '20240524_133924_0000.jpg?v=1' },
 				},
 				{
 					tag: 'meta',
