@@ -3,138 +3,64 @@ title: Getting Started
 description: Learn how to start building your next documentation site with Starlight by Astro.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid, Aside, Tabs, TabItem, LinkCard, Code, FileTree, Steps, Icon } from '@astrojs/starlight/components';
 
-Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.
-This guide will help you get started with a new project.
-See the [manual setup instructions](/manual-setup/) to add Starlight to an existing Astro project.
+Sebagai permulaan, mari kita bahas apa itu bot WhatsApp. Bot WhatsApp adalah program komputer yang dirancang untuk melakukan tugas tertentu secara otomatis di platform WhatsApp. Bot ini dapat digunakan untuk berbagai tujuan, seperti memberikan informasi, menjawab pertanyaan, mengirim pemberitahuan, atau bahkan melakukan interaksi yang lebih kompleks seperti memesan tiket atau melakukan reservasi.
 
-## Quick Start
+Node.js adalah lingkungan runtime JavaScript yang dibangun di atas mesin JavaScript V8 dari Chrome. Ini memungkinkan Anda untuk menjalankan JavaScript di luar browser, sehingga cocok untuk membuat server-side dan backend aplikasi web. Node.js sangat populer dalam pengembangan web karena kinerja tinggi dan arsitektur non-blocking I/O yang efisien.
 
-### Create a new project
+Untuk membuat bot WhatsApp dengan Node.js, langkah-langkah umumnya adalah sebagai berikut:
 
-Create a new Astro + Starlight project by running the following command in your terminal:
+1. **Persiapan Awal**: Instal Node.js dan npm (Node Package Manager) jika belum terpasang.
 
-<Tabs>
-<TabItem label="npm">
+2. **Inisialisasi Proyek**: Buat proyek Node.js baru dengan `npm init` dan menginstal modul-modul yang diperlukan seperti `whatsapp-web.js` yang memungkinkan Anda untuk berinteraksi dengan WhatsApp melalui kode JavaScript.
 
-```sh
-npm create astro@latest -- --template starlight
+3. **Mengatur Bot**: Buat kode JavaScript (misalnya `main.js`) untuk mengatur perilaku bot. Anda dapat membuat kode untuk menerima pesan, mengirim pesan, dan menjalankan logika bisnis lainnya.
+
+4. **Menjalankan Bot**: Jalankan bot Anda menggunakan Node.js dengan menjalankan file `main.js`.
+
+Berikut contoh sederhana struktur proyek Node.js untuk bot WhatsApp:
+
+1. **package.json**:
+```sh json
+{
+  "name": "whatsapp-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp bot using Node.js",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.12.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
 ```
 
-</TabItem>
-<TabItem label="pnpm">
+2. **main.js** (contoh sederhana):
+```sh javascript
+const { Client } = require('whatsapp-web.js');
+const client = new Client();
 
-```sh
-pnpm create astro --template starlight
+client.on('qr', (qr) => {
+    console.log('QR Code:', qr);
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.on('message', async (message) => {
+    if (message.body === 'ping') {
+        message.reply('pong');
+    }
+});
+
+client.initialize();
 ```
 
-</TabItem>
-<TabItem label="Yarn">
+Dalam contoh ini, kode `package.json` mengatur proyek dan dependensi, sedangkan `main.js` mengatur perilaku bot. Anda dapat menyesuaikan kode JavaScript di `main.js` sesuai dengan kebutuhan bot WhatsApp Anda.
 
-```sh
-yarn create astro --template starlight
-```
-
-</TabItem>
-</Tabs>
-
-This will create a new [project directory](/guides/project-structure/) with all the necessary files and configurations for your site.
-
-:::tip[See it in action]
-Try Starlight in your browser:
-[open the template on StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
-:::
-
-### Start the development server
-
-When working locally, [Astro’s development server](https://docs.astro.build/en/reference/cli-reference/#astro-dev) lets you preview your work and automatically refreshes your browser when you make changes.
-
-Inside your project directory, run the following command to start the development server:
-
-<Tabs>
-<TabItem label="npm">
-
-```sh
-npm run dev
-```
-
-</TabItem>
-<TabItem label="pnpm">
-
-```sh
-pnpm dev
-```
-
-</TabItem>
-<TabItem label="Yarn">
-
-```sh
-yarn dev
-```
-
-</TabItem>
-</Tabs>
-
-This will log a message to your terminal with the URL of your local preview.
-Open this URL to start browsing your site.
-
-### Add content
-
-Starlight is ready for you to add new content, or bring your existing files!
-
-Add new pages to your site by creating Markdown files in the `src/content/docs/` directory.
-
-Read more about file-based routing and support for MDX and Markdoc files in the [“Pages”](/guides/pages/) guide.
-
-### Next steps
-
-- **Configure:** Learn about common options in [“Customizing Starlight”](/guides/customization/).
-- **Navigate:** Set up your sidebar with the [“Sidebar Navigation”](/guides/sidebar/) guide.
-- **Components:** Discover built-in cards, tabs, and more in the [“Components”](/guides/components/) guide.
-- **Deploy:** Publish your work with the [“Deploy your site”](https://docs.astro.build/en/guides/deploy/) guide in the Astro docs.
-
-## Updating Starlight
-
-:::tip
-Because Starlight is beta software, there will be frequent updates and improvements.
-Be sure to update Starlight regularly!
-:::
-
-Starlight is an Astro integration. You can update it and other Astro packages by running the following command in your terminal:
-
-<Tabs>
-<TabItem label="npm">
-
-```sh
-npx @astrojs/upgrade
-```
-
-</TabItem>
-<TabItem label="pnpm">
-
-```sh
-pnpm dlx @astrojs/upgrade
-```
-
-</TabItem>
-<TabItem label="Yarn">
-
-```sh
-yarn dlx @astrojs/upgrade
-```
-
-</TabItem>
-</Tabs>
-
-See the [Starlight changelog](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md) for a full list of the changes made in each release.
-
-## Troubleshooting Starlight
-
-Use the [project configuration](/reference/configuration/) and [individual page frontmatter configuration](/reference/frontmatter/) reference pages to ensure that your Starlight site is configured and functioning properly.
-See the guides in the sidebar for help adding content and customizing your Starlight site.
-
-If your answer cannot be found in these docs, please visit the [full Astro Docs](https://docs.astro.build) for complete Astro documentation.
-Your question may be answered by understanding how Astro works in general, underneath this Starlight theme.
-
-You can also check for any known [Starlight issues on GitHub](https://github.com/withastro/starlight/issues), and get help in the [Astro Discord](https://astro.build/chat/) from our active, friendly community! Post questions in our `#support` forum with the "starlight" tag, or visit our dedicated `#starlight` channel to discuss current development and more!
+Pastikan Anda memiliki token atau kredensial yang diperlukan untuk mengakses API WhatsApp, tergantung pada pustaka yang Anda gunakan. Selain itu, Anda perlu memahami dokumentasi pustaka yang digunakan untuk mengoptimalkan bot WhatsApp Anda sesuai kebutuhan Anda.
