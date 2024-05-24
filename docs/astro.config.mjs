@@ -45,7 +45,7 @@ export default defineConfig({
 			},
 			social: {
 				youtube: 'https://youtube.com/@valzyofc',
-				Instagram: 'https://www.instagram.com/@valzyycans',
+				instagram: 'https://www.instagram.com/@valzyycans',
 				x: 'https://x.com/@valzyycans',
 				threads: 'https://www.threads.net/@valzyycans',
 			},
