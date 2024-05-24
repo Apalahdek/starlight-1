@@ -24,10 +24,8 @@ untuk setting bot folder nya ada Di bawah ini.
   - class-api
   - **settings.js** setting yg perlu di ganti aja 
   - verify.json
-- src
-  - **Another File**
-- lib
-  - **Another File**
+- src/
+- lib/
 - Vpsinfo.db
 - package-lock.json
 - package.json
@@ -38,6 +36,43 @@ untuk setting bot folder nya ada Di bawah ini.
 
 </FileTree>
 
-Setting yang sekiranya perlu kalian ganti, jangan di bikin error yaa coy <Icon name="seti:config" />settings.js.
+Setting yang sekiranya perlu kalian ganti, jangan di bikin error yaa coy lihat di bawah ini yg perlu kalian ubah.
 
+```js
+//system/settings.js
 
+global.owner = [
+  ['6285701479245'],
+  ['6285650805942'],
+  ['6285701479245', 'Valzyofc', 'contact@kemii.my.id', true]
+] 
+global.mods = ['6285701479245']
+global.prems = ['6285701479245']
+
+global.version = '5.0.3'
+global.sessionName = 'salsa'
+global.gcbot = 'https://chat.whatsapp.com/DX2DdYl9KR53hAoCX6pNVx'
+global.instagram = 'https://instagram.com/kemii.learning'
+global.namebot = '© Kiku-Wabot v5.0.3 (Public Bot)'
+global.thumb = 'https://telegra.ph/file/7b5416e93b4423845762d.jpg'
+global.thumbnail = 'https://telegra.ph/file/7b5416e93b4423845762d.jpg'
+
+global.qris = 'https://telegra.ph/file/bcb93fafb22f139ff1512.jpg'
+global.email = 'kiku.wabot@gmail.com'
+global.creator = "6285701479245@s.whatsapp.net"
+global.nomorbot = '-'
+global.nomorown = '6285701479245'
+
+global.packname = 'Kiku - Wabot'
+global.author = '-'
+global.wm = '© Valzyofc'
+global.wm2 = 'Salsa Javanese'
+global.titlebot = `${global.wm}`
+global.danied = 'A K S E S  K A M U  D I  T O L A K!!'
+global.done = '```Status Request :```' + ' `Succes`'
+global.packname = 'Zura - Wabot'
+global.botname = 'Zura - Wabot'
+global.author = 'Fiony🔥'
+global.nameown = 'Valzyofc'
+global.wait = 'Wait a moment... '
+```
