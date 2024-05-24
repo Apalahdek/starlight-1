@@ -27,7 +27,7 @@ const VERCEL_PREVIEW_SITE =
 	process.env.VERCEL_URL &&
 	`https://${process.env.VERCEL_URL}`;
 
-const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
+const site = VERCEL_PREVIEW_SITE || 'https://zura.valzyofc.my.id/';
 
 export default defineConfig({
 	site,
