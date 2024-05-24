@@ -2,7 +2,7 @@
 title: Setup zurabot
 ---
 
-import { Card, CardGrid, Aside, Tabs, TabItem, LinkCard, Code, FileTree, Steps, Icon } from '@astrojs/starlight/components';
+import { Card, CardGrid, Aside, Tabs, TabItem, LinkCard, Code, FileTree, Icon } from '@astrojs/starlight/components';
 
 <Aside>Script zurabot ini dijual!!, tidak gratis</Aside>
 
@@ -81,15 +81,16 @@ global.wait = 'Wait a moment... '
 
 ikuti step by step di bawah ini
 
+import { Steps } from '@astrojs/starlight/components';
+
 <Steps>
 
-1. upload file bot kedalam panel
+1. Import the component into your MDX file:
 
-```sh title="masukan ini kedalam startup"
-node main.js --pairing-code --autocleartmp --autoread
-```
-2. start panel dan tunggu
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
 
-3. masukan nomor whatsapp nya dan tautkan kodenya.
+2. Wrap `<Steps>` around your ordered list items.
 
 </Steps>
