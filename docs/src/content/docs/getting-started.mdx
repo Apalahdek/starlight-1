@@ -5,25 +5,7 @@ description: Learn how to start building your next documentation site with Starl
 
 import { Card, CardGrid, Aside, Tabs, TabItem, LinkCard, Code, FileTree, Steps, Icon } from '@astrojs/starlight/components';
 
-Sebagai permulaan, mari kita bahas apa itu bot WhatsApp. Bot WhatsApp adalah program komputer yang dirancang untuk melakukan tugas tertentu secara otomatis di platform WhatsApp. Bot ini dapat digunakan untuk berbagai tujuan, seperti memberikan informasi, menjawab pertanyaan, mengirim pemberitahuan, atau bahkan melakukan interaksi yang lebih kompleks seperti memesan tiket atau melakukan reservasi.
-
-Node.js adalah lingkungan runtime JavaScript yang dibangun di atas mesin JavaScript V8 dari Chrome. Ini memungkinkan Anda untuk menjalankan JavaScript di luar browser, sehingga cocok untuk membuat server-side dan backend aplikasi web. Node.js sangat populer dalam pengembangan web karena kinerja tinggi dan arsitektur non-blocking I/O yang efisien.
-
-Untuk membuat bot WhatsApp dengan Node.js, langkah-langkah umumnya adalah sebagai berikut:
-
-1. **Persiapan Awal**: Instal Node.js dan npm (Node Package Manager) jika belum terpasang.
-
-2. **Inisialisasi Proyek**: Buat proyek Node.js baru dengan `npm init` dan menginstal modul-modul yang diperlukan seperti `whatsapp-web.js` yang memungkinkan Anda untuk berinteraksi dengan WhatsApp melalui kode JavaScript.
-
-3. **Mengatur Bot**: Buat kode JavaScript (misalnya `main.js`) untuk mengatur perilaku bot. Anda dapat membuat kode untuk menerima pesan, mengirim pesan, dan menjalankan logika bisnis lainnya.
-
-4. **Menjalankan Bot**: Jalankan bot Anda menggunakan Node.js dengan menjalankan file `main.js`.
-
-Berikut contoh sederhana struktur proyek Node.js untuk bot WhatsApp:
-
-1. **package.json**:
-```sh json
-{
+export const exampleCode1 = `{
   "name": "whatsapp-bot",
   "version": "1.0.0",
   "description": "WhatsApp bot using Node.js",
@@ -37,11 +19,10 @@ Berikut contoh sederhana struktur proyek Node.js untuk bot WhatsApp:
   "author": "Your Name",
   "license": "MIT"
 }
-```
+');`;
+export const fileName1 = 'package.json';
 
-2. **main.js** (contoh sederhana):
-```sh javascript
-const { Client } = require('whatsapp-web.js');
+export const exampleCode2 = `const { Client } = require('whatsapp-web.js');
 const client = new Client();
 
 client.on('qr', (qr) => {
@@ -59,7 +40,34 @@ client.on('message', async (message) => {
 });
 
 client.initialize();
-```
+');`;
+export const fileName2 = 'main.js';
+
+
+<Code code={exampleCode2} lang="json" title={fileName2} />
+
+
+Sebagai permulaan, mari kita bahas apa itu bot WhatsApp. Bot WhatsApp adalah program komputer yang dirancang untuk melakukan tugas tertentu secara otomatis di platform WhatsApp. Bot ini dapat digunakan untuk berbagai tujuan, seperti memberikan informasi, menjawab pertanyaan, mengirim pemberitahuan, atau bahkan melakukan interaksi yang lebih kompleks seperti memesan tiket atau melakukan reservasi.
+
+Node.js adalah lingkungan runtime JavaScript yang dibangun di atas mesin JavaScript V8 dari Chrome. Ini memungkinkan Anda untuk menjalankan JavaScript di luar browser, sehingga cocok untuk membuat server-side dan backend aplikasi web. Node.js sangat populer dalam pengembangan web karena kinerja tinggi dan arsitektur non-blocking I/O yang efisien.
+
+Untuk membuat bot WhatsApp dengan Node.js, langkah-langkah umumnya adalah sebagai berikut:
+
+1. **Persiapan Awal**: Instal Node.js dan npm (Node Package Manager) jika belum terpasang.
+
+2. **Inisialisasi Proyek**: Buat proyek Node.js baru dengan `npm init` dan menginstal modul-modul yang diperlukan seperti `whatsapp-web.js` yang memungkinkan Anda untuk berinteraksi dengan WhatsApp melalui kode JavaScript.
+
+3. **Mengatur Bot**: Buat kode JavaScript (misalnya `main.js`) untuk mengatur perilaku bot. Anda dapat membuat kode untuk menerima pesan, mengirim pesan, dan menjalankan logika bisnis lainnya.
+
+4. **Menjalankan Bot**: Jalankan bot Anda menggunakan Node.js dengan menjalankan file `main.js`.
+
+Berikut contoh sederhana struktur proyek Node.js untuk bot WhatsApp:
+
+1. **package.json**:
+<Code code={exampleCode1} lang="json" title={fileName2} />
+
+2. **main.js** (contoh sederhana):
+<Code code={exampleCode2} lang="js" title={fileName2} />
 
 Dalam contoh ini, kode `package.json` mengatur proyek dan dependensi, sedangkan `main.js` mengatur perilaku bot. Anda dapat menyesuaikan kode JavaScript di `main.js` sesuai dengan kebutuhan bot WhatsApp Anda.
 
