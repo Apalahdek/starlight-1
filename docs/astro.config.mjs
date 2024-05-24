@@ -59,11 +59,11 @@ export default defineConfig({
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + '20240524_133924_0000.jpg?v=1' },
+					attrs: { property: 'og:image', content: site + 'og.jpg?v=1' },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + '20240524_133924_0000.jpg?v=1' },
+					attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
 				},
 			],
 			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
